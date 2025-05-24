@@ -1,21 +1,55 @@
+/* app/globals.css 或 styles/globals.css */
+
+/* Tailwind CSS 指令，必须在最顶部 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* 之前在 App.js <style> 块中的 body 样式 */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* 确保这里没有冲突的 font-family 定义，让 Tailwind 来管理 */
+  /* background-color: #FCE38A; */ /* 对应 colors.secondary，如果已在 tailwind.config.js 中定义，可以在 body 标签上使用 bg-secondary 类 */
+  /* color: #000; */ /* 对应 colors.text，如果已在 tailwind.config.js 中定义，可以在 body 标签上使用 text-black 类 */
+}
+
+/* 之前在 App.js <style> 块中的自定义字体类 */
+/* 如果你在 tailwind.config.js 中配置了 fontFamily.k2d，
+   并且在 layout.js 中应用了 k2d.variable，
+   那么这些自定义的 font-k2d-thin/regular/bold 类就可以被移除，
+   直接使用 Tailwind 的 font-k2d font-thin/normal/bold 类。
+   为了兼容性，暂时保留。 */
+.font-k2d-thin {
+    font-family: 'K2D', sans-serif;
+    font-weight: 100;
+}
+.font-k2d-regular {
+    font-family: 'K2D', sans-serif;
+    font-weight: 400;
+}
+.font-k2d-bold {
+    font-family: 'K2D', sans-serif;
+    font-weight: 700;
+}
+
+/* 之前在 App.js <style> 块中的 ripple 动画 */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    background-color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+}
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* 确保 html 和 body 没有默认的 margin/padding，让 Tailwind 的 Preflight 生效 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* 确保 min-h-screen 能够正确计算 */
 }
