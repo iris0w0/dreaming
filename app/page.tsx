@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ProjectDetailsModal from '../components/ProjectDetailsModal';
 import {
     Home, Award, Briefcase, Gamepad2, Brush, Twitter, Instagram, Linkedin, Music, ArrowUp, BookOpen,
