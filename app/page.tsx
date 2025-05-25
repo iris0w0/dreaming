@@ -932,6 +932,7 @@ const App = () => {
                 </section>
             </main>
 
+{mounted && <SpeedInsights />}
             {/* 返回顶部按钮 */}
             {mounted && showBackToTop && (
                 <button
