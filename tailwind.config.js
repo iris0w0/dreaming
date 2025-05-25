@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     screens: {
       sm: '40px',
-      md: '100px', // md 断点改为 900px
+      md: '768px', // md 断点改为 900px
       lg: '900px',
     },
     extend: {
