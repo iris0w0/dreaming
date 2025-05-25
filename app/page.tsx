@@ -704,7 +704,7 @@ const App = () => {
     const [projectBgIndexes, setProjectBgIndexes] = useState<number[]>(() =>
         Array(gameProjectsData.length).fill(0)
     );
-
+    const [hoveredProjectIdx, setHoveredProjectIdx] = useState<number | null>(null);
     const projectIntervalRef = useRef<(NodeJS.Timeout | null)[]>([]);
 
     const handleProjectMouseEnter = (idx: number) => {
