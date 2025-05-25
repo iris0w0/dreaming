@@ -661,7 +661,11 @@ const App = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setSkillBgIndexes(prev =>
-                prev.map((idx, i) => (idx + 1 + i) % skillColors.length)
+                prev.map((idx) => {
+                    let nextIdx = Math.floor(Math.random() * (skillColors.length - 1));
+                    if (nextIdx >= idx) nextIdx += 1;
+                    return nextIdx;
+                })
             );
         }, 2000);
         return () => clearInterval(interval);
