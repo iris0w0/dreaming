@@ -162,12 +162,6 @@ const workExperienceData: WorkExperience[] = [
     },
 ];
 
-const fullIntroText = `Hey, I’m Jingyi Zhang (Iris) 👋
-I’m a professional Game Designer, Project Manager, Community Manager, and sometimes an Artist.
-
-Welcome to my space — here’s where you can explore what I’m creating, managing, and dreaming up.
-I do my best to bring ideas to life with a whole lot of ❤️`;
-
 const welcomeText = `Welcome to my space — here’s where you can explore what I’m creating, managing, and dreaming up.
 
 I do my best to bring ideas to life with a whole lot of ❤️`;
@@ -724,9 +718,6 @@ const App = () => {
         setModalPosition(null);
         setTimeout(() => setSelectedProject(null), 300);
     };
-
-    // 让导航栏始终浮动底部，内容区有足够padding-bottom
-    const NAV_HEIGHT = 50;
 
     const skillColors = [colors.primary, colors.secondary, colors.accent1, colors.accent2];
     // 为每个技能卡片维护一个颜色索引
