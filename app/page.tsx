@@ -659,19 +659,105 @@ const App = () => {
     const NAV_HEIGHT = 50;
 
     const skillColors = [colors.primary, colors.secondary, colors.accent1, colors.accent2];
-// 为每个技能卡片维护一个颜色索引
-const [skillBgIndexes, setSkillBgIndexes] = useState<number[]>(() =>
-    Array(skillsData.length).fill(0)
-);
-// 定时切换每个卡片的颜色
-useEffect(() => {
-    const interval = setInterval(() => {
-        setSkillBgIndexes(prev =>
-            prev.map((idx, i) => (idx + 1 + i) % skillColors.length) // 每个卡片步进不同，显得更跳跃
+    // 为每个技能卡片维护一个颜色索引
+    const [skillBgIndexes, setSkillBgIndexes] = useState<number[]>(() =>
+        Array(skillsData.length).fill(0)
+    );
+    // 定时切换每个卡片的颜色
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSkillBgIndexes(prev =>
+                prev.map((idx, i) => (idx + 1 + i) % skillColors.length) // 每个卡片步进不同，显得更跳跃
+            );
+        }, 2000); // 0.6秒切换一次
+        return () => clearInterval(interval);
+    }, [skillsData.length, skillColors.length]);
+
+    //work afar
+    const workCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const [workCardTransforms, setWorkCardTransforms] = useState<{ scale: number; translateY: number; opacity: number }[]>(
+        () => workExperienceData.map(() => ({ scale: 1, translateY: 0, opacity: 1 }))
+    );
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const newTransforms = workCardRefs.current.map((ref) => {
+                if (!ref) return { scale: 1, translateY: 0, opacity: 1 };
+                const rect = ref.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                // 计算卡片中心距离视口中心的距离
+                const cardCenter = rect.top + rect.height / 2;
+                const viewportCenter = windowHeight / 2;
+                const dist = cardCenter - viewportCenter;
+                // 距离越远，scale 越小，opacity 越低，translateY 越大
+                const maxDist = windowHeight * 0.8;
+                const norm = Math.min(Math.abs(dist) / maxDist, 1);
+                const scale = 1 - norm * 0.25; // 最小缩放到0.75
+                const opacity = 1 - norm * 0.6; // 最小透明度0.4
+                const translateY = dist * 0.18; // 产生远近感
+                return { scale, translateY, opacity };
+            });
+            setWorkCardTransforms(newTransforms);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // 初始化
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const projectColors = [colors.accent1, colors.accent2, colors.primary, colors.secondary];
+    // 为每个项目卡片维护一个颜色索引和悬停状态
+    const [projectBgIndexes, setProjectBgIndexes] = useState<number[]>(() =>
+        Array(gameProjectsData.length).fill(0)
+    );
+    const [hoveredProjectIdx, setHoveredProjectIdx] = useState<number | null>(null);
+    const projectIntervalRef = useRef<(NodeJS.Timeout | null)[]>([]);
+
+    const handleProjectMouseEnter = (idx: number) => {
+        setHoveredProjectIdx(idx);
+
+        // 立即切换到下一个颜色
+        setProjectBgIndexes(prev =>
+            prev.map((colorIdx, i) =>
+                i === idx ? (colorIdx + 1) % projectColors.length : colorIdx
+            )
         );
-    }, 2000); // 0.6秒切换一次
-    return () => clearInterval(interval);
-}, [skillsData.length, skillColors.length]);
+
+        // 启动动画
+        if (projectIntervalRef.current[idx]) clearInterval(projectIntervalRef.current[idx]!);
+        projectIntervalRef.current[idx] = setInterval(() => {
+            setProjectBgIndexes(prev =>
+                prev.map((colorIdx, i) =>
+                    i === idx ? (colorIdx + 1) % projectColors.length : colorIdx
+                )
+            );
+        }, 4000); // 0.4秒切换一次
+    };
+
+    const handleProjectMouseLeave = (idx: number) => {
+        setHoveredProjectIdx(null);
+        // 停止动画并恢复原色
+        if (projectIntervalRef.current[idx]) {
+            clearInterval(projectIntervalRef.current[idx]!);
+            projectIntervalRef.current[idx] = null;
+        }
+        setProjectBgIndexes(prev =>
+            prev.map((colorIdx, i) => (i === idx ? 0 : colorIdx))
+        );
+    };
+
+    useEffect(() => {
+        // 组件卸载时清理所有interval
+        return () => {
+            projectIntervalRef.current.forEach(timer => {
+                if (timer) clearInterval(timer);
+            });
+        };
+    }, []);
+
+    // article bigger
+    const [hoveredArticleIdx, setHoveredArticleIdx] = useState<number | null>(null);
+    const articleHoverColors = [colors.primary, colors.accent2, colors.accent1, colors.secondary];
 
     return (
       <div className="relative min-h-screen" style={{ backgroundColor: colors.secondary, color: colors.text, fontFamily: 'K2D, sans-serif' }}>
@@ -734,7 +820,11 @@ useEffect(() => {
 
             {/* 页面内容，底部留出导航栏高度 */}
                 <main className="mx-auto px-4 py-16 md:py-24" style={{ maxWidth: 900, paddingBottom: NAV_HEIGHT + 32 }}>
-                <section id="home" className="flex flex-col items-center justify-center text-center min-h-[60vh]">
+                <section
+    id="home"
+    className="flex flex-col items-center justify-center text-center min-h-[60vh]"
+    style={{ marginTop: '90px' }}
+    >
                     <img
                         src="/images/your_photo.jpg"
                         alt="Jingyi Zhang (Iris)"
@@ -773,7 +863,7 @@ useEffect(() => {
                     </div>
                     <button
                         onClick={handleDownloadResume}
-                        className="relative mt-4 px-8 py-4 bg-gradient-to-r from-red-400 to-pink-500 text-white text-lg font-k2d-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 overflow-hidden"
+                        className="relative mt-20 px-8 py-4 bg-gradient-to-r from-red-400 to-pink-500 text-white text-lg font-k2d-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 overflow-hidden"
                         style={{ backgroundColor: colors.primary }}
                     >
                         GET MY RESUME
@@ -786,26 +876,26 @@ useEffect(() => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-4xl">
         {skillsData.map((skill, index) => (
             <div
-                key={index}
-                className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center font-k2d-regular cursor-pointer"
-                style={{
-                    backgroundColor: skillColors[skillBgIndexes[index]],
-                    transition: 'background-color 0.5s cubic-bezier(.4,2,.3,1)'
-                }}
-                onClick={() => setSelectedSkill(selectedSkill === skill.name ? null : skill.name)}
-            >
-                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{skill.name}</h3>
-                {selectedSkill === skill.name && (
-                    <div className="mt-4 flex flex-wrap justify-center gap-4">
-                        {skill.tools.map((tool, toolIndex) => (
-                            <div key={toolIndex} className="flex flex-col items-center text-sm font-k2d-regular">
-                                {toolIcons[tool] || <span className="w-5 h-5">?</span>}
-                                <span className="mt-1">{tool}</span>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+    key={index}
+    className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center font-k2d-regular cursor-pointer flex flex-col items-center justify-center h-full"
+    style={{
+        backgroundColor: skillColors[skillBgIndexes[index]],
+        transition: 'background-color 0.5s cubic-bezier(.4,2,.3,1)'
+    }}
+    onClick={() => setSelectedSkill(selectedSkill === skill.name ? null : skill.name)}
+>
+    <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{skill.name}</h3>
+    {selectedSkill === skill.name && (
+        <div className="mt-4 flex flex-wrap justify-center gap-4">
+            {skill.tools.map((tool, toolIndex) => (
+                <div key={toolIndex} className="flex flex-col items-center text-sm font-k2d-regular">
+                    {toolIcons[tool] || <span className="w-5 h-5">?</span>}
+                    <span className="mt-1">{tool}</span>
+                </div>
+            ))}
+        </div>
+    )}
+</div>
         ))}
     </div>
 </section>
@@ -818,8 +908,14 @@ useEffect(() => {
             <div
                 key={index}
                 className="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden font-k2d-regular cursor-pointer"
-                style={{ backgroundColor: colors.accent1 }}
+                style={{
+                    backgroundColor: projectColors[projectBgIndexes[index]],
+                    transition: 'background-color 0.4s cubic-bezier(.4,2,.3,1)'
+                }}
                 onClick={(event) => handleProjectClick(project, event)}
+                onMouseEnter={() => handleProjectMouseEnter(index)}
+                onMouseLeave={() => handleProjectMouseLeave(index)}
+                tabIndex={0}
             >
                 <img
                     src={project.imageSrc}
@@ -858,6 +954,13 @@ useEffect(() => {
         {workExperienceData.map((job, index) => (
             <div
                 key={index}
+                ref={el => workCardRefs.current[index] = el}
+                style={{
+                    transform: `scale(${workCardTransforms[index]?.scale ?? 1}) translateY(${workCardTransforms[index]?.translateY ?? 0}px)`,
+                    opacity: workCardTransforms[index]?.opacity ?? 1,
+                    transition: 'transform 0.5s cubic-bezier(.4,2,.3,1), opacity 0.5s cubic-bezier(.4,2,.3,1)',
+                    willChange: 'transform, opacity',
+                }}
                 className={`flex flex-col md:flex-row items-start md:items-stretch w-full mb-12 relative ${
                     index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 }`}
@@ -946,20 +1049,44 @@ useEffect(() => {
 <section id="articles" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
     <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Articles</h2>
     <div className="w-full max-w-4xl space-y-8">
-        {articlesData.map((article, index) => (
-            <div key={index} className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: colors.accent1 }}>
-                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{article.title}</h3>
-                <p className="text-gray-700 mb-4" style={{ whiteSpace: 'pre-line' }}>{article.description}</p>
-                <a
-                    href={article.link}
-                    className="inline-block text-blue-600 hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
+        {articlesData.map((article, index) => {
+            // 悬停时变大+背景色变化
+            const isHovered = hoveredArticleIdx === index;
+            const bgColor = isHovered
+                ? articleHoverColors[index % articleHoverColors.length]
+                : colors.accent1;
+            const scale = isHovered ? 1.07 : 1;
+            const boxShadow = isHovered
+                ? `0 8px 32px 0 ${colors.primary}33`
+                : '0 2px 12px 0 #0001';
+
+            return (
+                <div
+                    key={index}
+                    className="p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 font-k2d-regular cursor-pointer"
+                    style={{
+                        backgroundColor: bgColor,
+                        transform: `scale(${scale})`,
+                        boxShadow,
+                        transition: 'background-color 0.3s cubic-bezier(.4,2,.3,1), transform 0.3s cubic-bezier(.4,2,.3,1), box-shadow 0.3s cubic-bezier(.4,2,.3,1)'
+                    }}
+                    onMouseEnter={() => setHoveredArticleIdx(index)}
+                    onMouseLeave={() => setHoveredArticleIdx(null)}
+                    tabIndex={0}
                 >
-                    Read More
-                </a>
-            </div>
-        ))}
+                    <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{article.title}</h3>
+                    <p className="text-gray-700 mb-4" style={{ whiteSpace: 'pre-line' }}>{article.description}</p>
+                    <a
+                        href={article.link}
+                        className="inline-block text-blue-600 hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Read More
+                    </a>
+                </div>
+            );
+        })}
     </div>
 </section>
     </main>
