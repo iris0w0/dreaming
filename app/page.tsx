@@ -162,7 +162,7 @@ const workExperienceData: WorkExperience[] = [
 ];
 
 const fullIntroText = `Hey, I’m Jingyi Zhang (Iris) 👋
-I’m a Game Designer, Project Manager, Community Manager, and sometimes an Artist.
+I’m a professional Game Designer, Project Manager, Community Manager, and sometimes an Artist.
 
 Welcome to my space — here’s where you can explore what I’m creating, managing, and dreaming up.
 I do my best to bring ideas to life with a whole lot of ❤️`;
@@ -524,6 +524,9 @@ const App = () => {
 
     // My Skills section
     const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+    // 检测skills区域是否在视口
+    const [isSkillsInView, setIsSkillsInView] = useState(false);
+    const skillsSectionRef = useRef<HTMLDivElement>(null);
 
     // Modal
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -667,7 +670,7 @@ const App = () => {
                     return nextIdx;
                 })
             );
-        }, 2000);
+        }, 4000);
         return () => clearInterval(interval);
     }, [skillColors.length]);
 
@@ -700,6 +703,20 @@ const App = () => {
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll(); // 初始化
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    //不在页面内时停动
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!skillsSectionRef.current) return;
+            const rect = skillsSectionRef.current.getBoundingClientRect();
+            // 只要有一部分在视口内就算in view
+            const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+            setIsSkillsInView(inView);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -867,14 +884,18 @@ const App = () => {
                 </section>
 
     {/* My Skills Section */}
-    <section id="skills" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
+    <section
+        id="skills"
+        ref={skillsSectionRef}
+        className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32"
+    >
     <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>My Skills</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-4xl">
         {skillsData.map((skill, index) => {
         const bgColor = skillColors[skillBgIndexes[index]];
         const isRed = bgColor === colors.primary;
         const isSelected = selectedSkill === skill.name;
-        const showTools = isSelected || isRed;
+        const showTools = isSelected || (isRed && isSkillsInView);
 
         return (
             <div
