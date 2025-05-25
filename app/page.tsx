@@ -862,35 +862,42 @@ const App = () => {
                     </button>
                 </section>
 
-                {/* My Skills Section */}
-<section id="skills" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
+    {/* My Skills Section */}
+    <section id="skills" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
     <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>My Skills</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-4xl">
-        {skillsData.map((skill, index) => (
+        {skillsData.map((skill, index) => {
+        const bgColor = skillColors[skillBgIndexes[index]];
+        const isRed = bgColor === colors.primary;
+        const isSelected = selectedSkill === skill.name;
+        const showTools = isSelected || isRed;
+
+        return (
             <div
-    key={index}
-    className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center font-k2d-regular cursor-pointer flex flex-col items-center justify-center h-full"
-    style={{
-        backgroundColor: skillColors[skillBgIndexes[index]],
-        transition: 'background-color 0.5s cubic-bezier(.4,2,.3,1)'
-    }}
-    onClick={() => setSelectedSkill(selectedSkill === skill.name ? null : skill.name)}
->
-    <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{skill.name}</h3>
-    {selectedSkill === skill.name && (
-        <div className="mt-4 flex flex-wrap justify-center gap-4">
-            {skill.tools.map((tool, toolIndex) => (
-                <div key={toolIndex} className="flex flex-col items-center text-sm font-k2d-regular">
+            key={index}
+            className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center font-k2d-regular cursor-pointer flex flex-col items-center justify-center h-full"
+            style={{
+                backgroundColor: bgColor,
+                transition: 'background-color 0.5s cubic-bezier(.4,2,.3,1)'
+            }}
+            onClick={() => setSelectedSkill(selectedSkill === skill.name ? null : skill.name)}
+            >
+            <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{skill.name}</h3>
+            {showTools && (
+                <div className="mt-4 flex flex-wrap justify-center gap-4">
+                {skill.tools.map((tool, toolIndex) => (
+                    <div key={toolIndex} className="flex flex-col items-center text-sm font-k2d-regular">
                     {toolIcons[tool] || <span className="w-5 h-5">?</span>}
                     <span className="mt-1">{tool}</span>
+                    </div>
+                ))}
                 </div>
-            ))}
-        </div>
-    )}
-</div>
-        ))}
+            )}
+            </div>
+        );
+        })}
     </div>
-</section>
+    </section>
 
                     {/* Game Projects Section*/}
 <section id="game-projects" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
