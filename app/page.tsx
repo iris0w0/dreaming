@@ -7,6 +7,7 @@ import {
     Home, Award, Briefcase, Gamepad2, Brush, Twitter, Instagram, Linkedin, Music, ArrowUp, BookOpen,
     Chrome, Box, ListTodo, LayoutGrid, ClipboardList, GitBranch, GitCommit, Code, Palette, PenTool, Film, AudioWaveform, LayoutDashboard, VolumeX, Volume2
 } from 'lucide-react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // =================== 类型定义与基础数据 ===================
 type MouseParticle = {
