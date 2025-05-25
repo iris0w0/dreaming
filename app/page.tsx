@@ -946,7 +946,7 @@ const App = () => {
         {workExperienceData.map((job, index) => (
             <div
                 key={index}
-                ref={el => workCardRefs.current[index] = el}
+                ref={el => { workCardRefs.current[index] = el; }}
                 style={{
                     transform: `scale(${workCardTransforms[index]?.scale ?? 1}) translateY(${workCardTransforms[index]?.translateY ?? 0}px)`,
                     opacity: workCardTransforms[index]?.opacity ?? 1,
