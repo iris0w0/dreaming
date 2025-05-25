@@ -444,16 +444,18 @@ function FisheyeNavBar({
     return (
         <div
             ref={navRef}
-            className="fixed left-1/2 bottom-8 z-50 flex justify-center items-center"
+            className="fixed left-1/2 bottom-8 z-50 flex justify-center items-center w-full px-2"
             style={{
                 transform: `translateX(-50%) scale(${navScale})`,
                 transition: 'transform 0.35s cubic-bezier(.4,2,.3,1)',
+                maxWidth: '100vw',
             }}
             onMouseEnter={() => setNavHover(true)}
             onMouseLeave={() => setNavHover(false)}
         >
+            {/* 外层加overflow-x-auto，内部flex-nowrap，保证超出时可滚动 */}
             <div
-                className="flex gap-2 md:gap-4 px-4 py-3 rounded-full shadow-2xl bg-white/90 border border-pink-200 backdrop-blur-md"
+                className="flex gap-2 md:gap-4 px-4 py-3 rounded-full shadow-2xl bg-white/90 border border-pink-200 backdrop-blur-md overflow-x-auto flex-nowrap"
                 style={{
                     boxShadow: navHover || hoveredIdx !== null
                         ? `0 8px 40px 0 ${colors.primary}33`
@@ -462,6 +464,8 @@ function FisheyeNavBar({
                     background: navHover || hoveredIdx !== null
                         ? colors.accent2
                         : colors.accent2,
+                    WebkitOverflowScrolling: 'touch', // iOS 惯性滚动
+                    maxWidth: '100vw',
                 }}
             >
                 {items.map((item, idx) => {
