@@ -503,74 +503,6 @@ function FisheyeNavBar({
     );
 }
 
-    // 环形标签动画组件
-    function RotatingLabels({
-        labels,
-        radius,
-        fontSize,
-        duration,
-        color,
-        }: {
-        labels: string[];
-        radius: number;
-        fontSize: number;
-        duration: number; // 动画一圈秒数
-        color: string;
-        }) {
-        // 旋转动画
-        const [angle, setAngle] = useState(0);
-        useEffect(() => {
-            let frame: number;
-            const animate = () => {
-            setAngle((prev) => (prev + 360 / (duration * 60)) % 360);
-            frame = requestAnimationFrame(animate);
-            };
-            frame = requestAnimationFrame(animate);
-            return () => cancelAnimationFrame(frame);
-        }, [duration]);
-        const count = labels.length;
-        return (
-            <div
-            style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                width: radius * 2,
-                height: radius * 2,
-                transform: 'translate(-50%, -50%)',
-                pointerEvents: 'none',
-            }}
-            >
-            {labels.map((label, i) => {
-                const theta = ((360 / count) * i + angle) * (Math.PI / 180);
-                const x = radius + radius * Math.cos(theta);
-                const y = radius + radius * Math.sin(theta);
-                return (
-                <span
-                    key={label}
-                    style={{
-                    position: 'absolute',
-                    left: x,
-                    top: y,
-                    transform: `translate(-50%, -50%)`,
-                    fontSize,
-                    color,
-                    fontWeight: 700,
-                    whiteSpace: 'nowrap',
-                    textShadow: '0 2px 8px #fff8',
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                    letterSpacing: 1,
-                    }}
-                >
-                    {label}
-                </span>
-                );
-            })}
-            </div>
-        );
-        }
-
 // =================== 页面主组件 ===================
 const App = () => {
     // 音乐播放
@@ -685,17 +617,6 @@ const App = () => {
             const el = document.getElementById(item.id);
             if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
-    };
-
-    // Resume download handler
-    const handleDownloadResume = () => {
-        const resumeUrl = '/resume/jingyi_zhang_resume.pdf';
-        const link = document.createElement('a');
-        link.href = resumeUrl;
-        link.setAttribute('download', 'Jingyi_Zhang_Resume.pdf');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
     };
 
     // open project animation
