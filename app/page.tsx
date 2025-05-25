@@ -48,6 +48,10 @@ type Project = {
     detailedDescription: string;
 };
 
+type art = {
+    description: string;
+};
+
 type ModalPosition = { left: number; top: number; width: number; height: number };
 
 const colors = {
@@ -61,8 +65,8 @@ const colors = {
 const navItems: NavItem[] = [
     { name: 'Home', icon: Home, id: 'home' },
     { name: 'My Skills', icon: Award, id: 'skills' },
-    { name: 'Work Experience', icon: Briefcase, id: 'experience' },
     { name: 'Game Projects', icon: Gamepad2, id: 'game-projects' },
+    { name: 'Work Experience', icon: Briefcase, id: 'experience' },
     { name: 'Art Works', icon: Brush, id: 'art-works' },
     { name: 'Articles', icon: BookOpen, id: 'articles' },
     { name: 'Twitter', icon: Twitter, link: 'https://twitter.com/Iris_dreaming_' },
@@ -178,7 +182,7 @@ const gameProjectsData: Project[] = [
             '/images/game_projects/headache4.png',
             '/images/game_projects/headache5.png',
         ],
-        detailedDescription: 'For example, though you ‘win’ the game by losing it, the very polite Swedish drivers will essentially refuse to hit you with their cars. On the other hand, the taxi drivers drive much faster, and will not even try to slow down.',
+        detailedDescription: 'For example, though you ‘win’ the game by losing it, the very polite Swedish drivers will essentially refuse to hit you with their cars. \nOn the other hand, the taxi drivers drive much faster, and will not even try to slow down.',
     },
     {
         name: 'Evoslime',
@@ -190,7 +194,7 @@ const gameProjectsData: Project[] = [
             '/images/game_projects/slime2.png',
             '/images/game_projects/slime3.png',
         ],
-        detailedDescription: 'The player is a slime creature who was created by a wizard. In the game the wizard has sent you to fight different enemies to see how successful his creation is. When the player is defeated by a creature the wizard iterates on their creation, giving the player a new ability to be able to defeat the enemy that previously beat them.',
+        detailedDescription: 'The player is a slime creature who was created by a wizard. In the game the wizard has sent you to fight different enemies to see how successful his creation is. \nWhen the player is defeated by a creature the wizard iterates on their creation, giving the player a new ability to be able to defeat the enemy that previously beat them.',
     },
     {
         name: 'Move',
@@ -201,7 +205,7 @@ const gameProjectsData: Project[] = [
             '/images/game_projects/move1.png',
             '/images/game_projects/move2.png',
         ],
-        detailedDescription: 'The player can always lie on the bed, but the anxiety/depression value will keep rising until the end of the game. Players can also get up from bed and do some physical exercise to complete their daily activities like having lunch. If anxiety/hunger is too high, more physical exercise is needed to achieve this daily activity. Some events require more difficult actions, such as doing squat holds. For example: the phone keeps ringing, and to answer the phone, do squat hold for 10 seconds. If the phone rings three times and doesnt answer, the anxiety value will increase, the player must do 10 more squats for the following activity. Friends, family and financial status are random and not displayed directly to the player. Daily mood (affected by anxiety)/energy (affected by hunger) is determined by dice, mood/energy affects efficiency, that is, the number of squats. The content of notes/calls/text messages will hint at the main characters relationship/economic situation and plot.',
+        detailedDescription: 'The player can always lie on the bed, but the anxiety/depression value will keep rising until the end of the game. \nPlayers can also get up from bed and do some physical exercise to complete their daily activities like having lunch. \nIf anxiety/hunger is too high, more physical exercise is needed to achieve this daily activity. \nSome events require more difficult actions, such as doing squat holds. For example: the phone keeps ringing, and to answer the phone, do squat hold for 10 seconds. If the phone rings three times and doesnt answer, the anxiety value will increase, the player must do 10 more squats for the following activity. \nFriends, family and financial status are random and not displayed directly to the player. \nDaily mood (affected by anxiety)/energy (affected by hunger) is determined by dice, mood/energy affects efficiency, that is, the number of squats. \nThe content of notes/calls/text messages will hint at the main characters relationship/economic situation and plot.',
     },
     {
         name: 'Snuffed Out',
@@ -213,7 +217,7 @@ const gameProjectsData: Project[] = [
             '/images/game_projects/snuff2.jpg',
             '/images/game_projects/snuff3.png',
         ],
-        detailedDescription: '- It’s a campfire at the end of the world. 5 strangers (players) converse with each other about their lives before they’re snuffed out, but their anxiety is high, and emotions are hard to contain. Words are hard to vocalise, they feel limited by the sadness. The game takes place over 12hrs (8pm-8am), with each turn lasting an hour. The goal is to keep each other company without any player plunging into total despair by the final hour.  - Every player has a private info card with personality, age, name, bio, etc. Also game impacting traits like hating physical contact, being mute, etc.  - A despair meter (life points) is kept track of. The group starts with 5/20 despair points and each action a player can take increases or decreases this meter. However, every turn the meter lowers by 1, and some random events insure it will lower more than normal, or increase.  - Players can only target someone else, and only one person a turn.  - It is necessary to keep track of every player’s personality to ensure everyone survives the night. - Actions are revealed simultaneously for every player. - Actions might be: hug, casual talk, reminisce, empathise, motivate etc. These either +2, +1, -1 or -2 points depending on target’s info card traits.  - Random events can be: group hears a bomb go off nearby: - 2 points for everyone. Group sees a squirrel pass by: +1 point for everyone etc etc.',
+        detailedDescription: '- It’s a campfire at the end of the world. 5 strangers (players) converse with each other about their lives before they’re snuffed out, but their anxiety is high, and emotions are hard to contain. Words are hard to vocalise, they feel limited by the sadness. \nThe game takes place over 12hrs (8pm-8am), with each turn lasting an hour. \nThe goal is to keep each other company without any player plunging into total despair by the final hour.  \n \n- Every player has a private info card with personality, age, name, bio, etc. Also game impacting traits like hating physical contact, being mute, etc.  \n- A despair meter (life points) is kept track of. The group starts with 5/20 despair points and each action a player can take increases or decreases this meter. However, every turn the meter lowers by 1, and some random events insure it will lower more than normal, or increase.  \n- Players can only target someone else, and only one person a turn.  \n- It is necessary to keep track of every player’s personality to ensure everyone survives the night. \n- Actions are revealed simultaneously for every player. \n- Actions might be: hug, casual talk, reminisce, empathise, motivate etc. These either +2, +1, -1 or -2 points depending on target’s info card traits.  \n- Random events can be: group hears a bomb go off nearby: \n- 2 points for everyone. Group sees a squirrel pass by: +1 point for everyone etc etc.',
     },
     {
         name: 'The Children of Caitt',
@@ -221,7 +225,6 @@ const gameProjectsData: Project[] = [
         imageSrc: '/images/game_projects/project_5.jpg',
         detailedImageSrcs: [
             '/images/game_projects/project_5.jpg',
-            '/images/game_projects/cat1.png',
             '/images/game_projects/cat2.png',
             '/images/game_projects/cat3.png',
             '/images/game_projects/cat4.png',
@@ -229,7 +232,7 @@ const gameProjectsData: Project[] = [
             '/images/game_projects/cat6.png',
             '/images/game_projects/cat7.png',
         ],
-        detailedDescription: 'The original concept of the game is to make an ARG that players can participate in exploring and interacting with a story. After brainstorming, we thought of cats as mysterious creatures and the Cat Earth Society meme. We pictured an ancient secret religion that worshipped cats and linked the fictional events with Gotlands history and artifacts. Therefore, we set up puzzles to test our players, and let players who pass all the puzzles join the secret society. Thus, we refer to the opening of The Book of Genesis, that God created the world in seven days. We designed the progression of the game to be seven days. Players need to solve a puzzle every day for the first six days, and the last day is for rest and real-life gatherings of players. ',
+        detailedDescription: 'The original concept of the game is to make an ARG that players can participate in exploring and interacting with a story. \nAfter brainstorming, we thought of cats as mysterious creatures and the Cat Earth Society meme. \nWe pictured an ancient secret religion that worshipped cats and linked the fictional events with Gotlands history and artifacts. \nTherefore, we set up puzzles to test our players, and let players who pass all the puzzles join the secret society. Thus, we refer to the opening of The Book of Genesis, that God created the world in seven days. We designed the progression of the game to be seven days. Players need to solve a puzzle every day for the first six days, and the last day is for rest and real-life gatherings of players. \n \n Worldbuilding \nRoots of our Cat-ism religion \nIn Two-legs mythology, Goddess Freyjas chariot was pulled by two cats, Bygul and Trjegul. However, in the doctrine of Caitt Society, the true gods are the cats. \nThe true God Caitt created the world in seven days. Caitt created all the things for cats and Caitts children according to the Book of Gemeowsis. \nIn AD 800, Caitt heeded the request of Two-legs and founded the Kingdom of Cat for their people. \n \nReligious persecution \nOver time, the two-legged, non-furry, up-walking creatures betrayed Caitt. A conspiracy to deicide was effectuated and implemented. \nThe Great Cat Massacre happened in the 1700s. Two-legs staged trials for cats, condemned them to death by hanging, and carried out the sentence. \nVisby, which was referred to as just Wi during the mid-14th century, meaning “holy place, place of worship”, was a place of Caitt’s blessing. After the Great Cat Massacre, surviving children of Caitt called the place “Visby”, which means the village of pagan sacrifices.  \n \nPagan’s vendetta \nDuring the religious persecution, survivors stood back, laid low, and waited for the time of revival. \nNowadays, the Children of Caitt are looking forward to recognizing each other in the crowd, and they have the same vendetta. \nTwo-legs had sworn they would not betray, which was proven to be a lie. Now, it is time for them to pay for it. The punishment of Caitt is about to come. \n \nBook of Gemeowsis \nIn the beginning, Caitt created the world. And Caitt said, let there be darkness: and there was darkness. And Caitt saw the darkness, that it was good, and Caittt called the darkness Night. It was the first day. \nAnd Caitt said, let there be a little light: and it was so. And Caitt called the light Moon, that it was good. And Caitt put the moon up high. It was the second day. \nAnd Caitt said, let the waters be gathered together into one place, and let the dry land appear: and it was so. And Caitt called the dry land Playground, and the waters They called the Fountain. And Caitt saw that it was good. It was the third day. \nAnd Caitt said, let there be moving creatures that have lives. And Caitt created fishes and birds, saying: Be fruitful, and multiply, that it was good. And Caitt called the fishes and the birds Food. It was the fourth day. \nAnd Caitt said, let there be feathers and balls: and it was so. And Caitt called the feathers and the balls Toy. And Caitt saw that it was good. It was the fifth day. \nAnd Caitt said, let there be Two-legs: and it was so. And Caitt blessed them, saying: Be sensible and loyal; Believe and trust Lord your Caitt. But without faith it is impossible to please Them. Caitt would punish you for your hearts that betray Them. And two-legs promised that they will not betray. It was the sixth day. \nAnd Caitt saw everything that he had made, and, behold, it was very good. Thus the world was finished. And Caitt rested from all their work which They had made. It was the seventh day. \n \nGameplay Story \nWe are the last faithful children of our kingdom, \nthe remaining loyal disciples of Caitt. \nWhat was defiled will be cleansed, \nwas stolen will get returned. \nAwake, the forgotten brothers and sisters of ours, \nour creator will rise, \nand those broken in Visby will be made whole again.',
     },
     {
         name: 'BLOCKLORDS',
@@ -243,17 +246,17 @@ const gameProjectsData: Project[] = [
             '/images/game_projects/BLOCKLORDS (1).png',
             '/images/game_projects/BLOCKLORDS (2).png',
         ],
-        detailedDescription: 'BLOCKLORDS harnesses web3 technology and gives players complete freedom of expression in its medieval metaverse. Players have the ability to craft their own unique narrative and story warring as salaried knights, pursuing lordship, wrecking havoc as raiders, developing their lineage, passing on coveted traits to heirs, and more still. Web3, or otherwise called blockchain technology, gives gamers full control over their gaming experience. The upcoming strategy title combines the best mechanics of top strategy games, from the political strategy of Crusader Kings to the battle of Total War. Built using Web3, each character in BLOCKLORDS exists as a unique digital asset whose attributes are determined through a combination of its history and player’s decisions. The game is also backed by a player-driven economy and ecosystem, giving players complete ownership over their character and heirs as they battle for their place in the rich and expansive medieval world. BLOCKLORDS makes it easy for anyone to start their epic quest by giving each new player a free starter character.',
+        detailedDescription: 'BLOCKLORDS harnesses web3 technology and gives players complete freedom of expression in its medieval metaverse. \nPlayers have the ability to craft their own unique narrative and story warring as salaried knights, pursuing lordship, wrecking havoc as raiders, developing their lineage, passing on coveted traits to heirs, and more still. \nWeb3, or otherwise called blockchain technology, gives gamers full control over their gaming experience. \nThe strategy title combines the best mechanics of top strategy games, from the political strategy of Crusader Kings to the battle of Total War. \nBuilt using Web3, each character in BLOCKLORDS exists as a unique digital asset whose attributes are determined through a combination of its history and player’s decisions. \nThe game is also backed by a player-driven economy and ecosystem, giving players complete ownership over their character and heirs as they battle for their place in the rich and expansive medieval world. \nBLOCKLORDS makes it easy for anyone to start their epic quest by giving each new player a free starter character.',
     },
 ];
 
 const artWorksData = [
-    { id: 1, aspectRatio: 'aspect-w-4 aspect-h-3', imageSrc: '/images/art_works/art_1.png', title: 'My Art 1' },
-    { id: 2, aspectRatio: 'aspect-w-3 aspect-h-4', imageSrc: '/images/art_works/art_2.png', title: 'My Art 2' },
-    { id: 3, aspectRatio: 'aspect-w-1 aspect-h-1', imageSrc: '/images/art_works/art_3.png', title: 'My Art 3' },
-    { id: 4, aspectRatio: 'aspect-w-16 aspect-h-9', imageSrc: '/images/art_works/art_4.png', title: 'My Art 4' },
-    { id: 5, aspectRatio: 'aspect-w-9 aspect-h-16', imageSrc: '/images/art_works/art_5.png', title: 'My Art 5' },
-    { id: 6, aspectRatio: 'aspect-w-5 aspect-h-4', imageSrc: '/images/art_works/art_6.png', title: 'My Art 6' },
+    { id: 1, aspectRatio: 'aspect-w-4 aspect-h-3', imageSrc: '/images/art_works/art_1.png', title: 'My Art 1', description: 'Paper-cut style illustration'},
+    { id: 2, aspectRatio: 'aspect-w-3 aspect-h-4', imageSrc: '/images/art_works/art_2.png', title: 'My Art 2', description: 'Aesthetic Character Design'},
+    { id: 3, aspectRatio: 'aspect-w-1 aspect-h-1', imageSrc: '/images/art_works/art_3.png', title: 'My Art 3', description: 'Character & Action Design'},
+    { id: 4, aspectRatio: 'aspect-w-16 aspect-h-9', imageSrc: '/images/art_works/art_4.png', title: 'My Art 4', description: 'Childrens picture book illustration'},
+    { id: 5, aspectRatio: 'aspect-w-9 aspect-h-16', imageSrc: '/images/art_works/art_5.png', title: 'My Art 5', description: '3D props deisgn and character design'},
+    { id: 6, aspectRatio: 'aspect-w-5 aspect-h-4', imageSrc: '/images/art_works/art_6.png', title: 'My Art 6', description: 'Character Design'},
 ];
 
 const articlesData = [
@@ -410,6 +413,9 @@ function FisheyeNavBar({
         };
     }, []);
 
+    //art tips
+    const [hoveredArtId, setHoveredArtId] = useState<number | null>(null);
+    
     // 计算每个按钮的scale/zIndex
     const getBtnProps = (idx: number) => {
         // 鼠标悬停优先
@@ -652,8 +658,23 @@ const App = () => {
     // 让导航栏始终浮动底部，内容区有足够padding-bottom
     const NAV_HEIGHT = 50;
 
+    const skillColors = [colors.primary, colors.secondary, colors.accent1, colors.accent2];
+// 为每个技能卡片维护一个颜色索引
+const [skillBgIndexes, setSkillBgIndexes] = useState<number[]>(() =>
+    Array(skillsData.length).fill(0)
+);
+// 定时切换每个卡片的颜色
+useEffect(() => {
+    const interval = setInterval(() => {
+        setSkillBgIndexes(prev =>
+            prev.map((idx, i) => (idx + 1 + i) % skillColors.length) // 每个卡片步进不同，显得更跳跃
+        );
+    }, 2000); // 0.6秒切换一次
+    return () => clearInterval(interval);
+}, [skillsData.length, skillColors.length]);
+
     return (
-        <div className="relative min-h-screen" style={{ backgroundColor: colors.secondary, color: colors.text, fontFamily: 'K2D, sans-serif' }}>
+      <div className="relative min-h-screen" style={{ backgroundColor: colors.secondary, color: colors.text, fontFamily: 'K2D, sans-serif' }}>
             <style>{`
                 body {
                     font-family: 'K2D', sans-serif;
@@ -712,8 +733,7 @@ const App = () => {
             )}
 
             {/* 页面内容，底部留出导航栏高度 */}
-            <main className="mx-auto px-4 py-16 md:py-24" style={{ maxWidth: 900, paddingBottom: NAV_HEIGHT + 32 }}>
-                {/* Home Section */}
+                <main className="mx-auto px-4 py-16 md:py-24" style={{ maxWidth: 900, paddingBottom: NAV_HEIGHT + 32 }}>
                 <section id="home" className="flex flex-col items-center justify-center text-center min-h-[60vh]">
                     <img
                         src="/images/your_photo.jpg"
@@ -761,190 +781,193 @@ const App = () => {
                 </section>
 
                 {/* My Skills Section */}
-                <section id="skills" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
-                    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>My Skills</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-4xl">
-                        {skillsData.map((skill, index) => (
-                            <div
-                                key={index}
-                                className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center font-k2d-regular cursor-pointer"
-                                style={{ backgroundColor: colors.accent1 }}
-                                onClick={() => setSelectedSkill(selectedSkill === skill.name ? null : skill.name)}
-                            >
-                                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{skill.name}</h3>
-                                {selectedSkill === skill.name && (
-                                    <div className="mt-4 flex flex-wrap justify-center gap-4">
-                                        {skill.tools.map((tool, toolIndex) => (
-                                            <div key={toolIndex} className="flex flex-col items-center text-sm font-k2d-regular">
-                                                {toolIcons[tool] || <span className="w-5 h-5">?</span>}
-                                                <span className="mt-1">{tool}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
+<section id="skills" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
+    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>My Skills</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-4xl">
+        {skillsData.map((skill, index) => (
+            <div
+                key={index}
+                className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-center font-k2d-regular cursor-pointer"
+                style={{
+                    backgroundColor: skillColors[skillBgIndexes[index]],
+                    transition: 'background-color 0.5s cubic-bezier(.4,2,.3,1)'
+                }}
+                onClick={() => setSelectedSkill(selectedSkill === skill.name ? null : skill.name)}
+            >
+                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{skill.name}</h3>
+                {selectedSkill === skill.name && (
+                    <div className="mt-4 flex flex-wrap justify-center gap-4">
+                        {skill.tools.map((tool, toolIndex) => (
+                            <div key={toolIndex} className="flex flex-col items-center text-sm font-k2d-regular">
+                                {toolIcons[tool] || <span className="w-5 h-5">?</span>}
+                                <span className="mt-1">{tool}</span>
                             </div>
                         ))}
                     </div>
-                </section>
-
-                {/* Work Experience Section */}
-                <section id="experience" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
-                    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Work Experience</h2>
-                    <div className="w-full max-w-4xl relative pl-8 md:pl-0">
-                        <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5" style={{ backgroundColor: colors.primary }}></div>
-                        {workExperienceData.map((job, index) => (
-                            <div
-                                key={index}
-                                className={`flex flex-col md:flex-row items-start md:items-stretch w-full mb-12 relative ${
-                                    index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                                }`}
-                            >
-                                {/* Timeline dot and line (mobile) */}
-                                <div className="md:hidden timeline-item w-full">
-                                    <div className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: index % 2 === 0 ? colors.accent1 : colors.accent2 }}>
-                                        <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{job.title}</h3>
-                                        <p className="text-lg text-gray-800 mb-1">{job.company}, {job.location}</p>
-                                        <p className="text-gray-600">{job.duration}</p>
-                                        <ul className="list-disc list-inside mt-4 text-gray-700 space-y-1">
-                                            {job.description.map((desc, i) => (
-                                                <li key={i}>{desc}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                                {/* Timeline dot and content (desktop) */}
-                                <div className="hidden md:flex w-full items-center justify-between">
-                                    {/* Left content */}
-                                    <div className={`w-full md:w-6/12 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
-                                        {index % 2 !== 0 && (
-                                            <div className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: index % 2 === 0 ? colors.accent1 : colors.accent2 }}>
-                                                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{job.title}</h3>
-                                                <p className="text-lg text-gray-800 mb-1">{job.company}, {job.location}</p>
-                                                <p className="text-gray-600">{job.duration}</p>
-                                                <ul className="list-disc list-inside mt-4 text-gray-700 space-y-1">
-                                                    {job.description.map((desc, i) => (
-                                                        <li key={i}>{desc}</li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-                                    </div>
-                                    {/* Timeline dot */}
-                                    <div className="relative w-2/12 flex justify-center">
-                                        <div className="w-4 h-4 rounded-full absolute top-1/2 -translate-y-1/2" style={{ backgroundColor: colors.primary, border: `2px solid ${colors.secondary}` }}></div>
-                                    </div>
-                                    {/* Right content */}
-                                    <div className={`w-full md:w-6/12 ${index % 2 === 0 ? '' : 'md:text-left'}`}>
-                                        {index % 2 === 0 && (
-                                            <div className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: index % 2 === 0 ? colors.accent1 : colors.accent2 }}>
-                                                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{job.title}</h3>
-                                                <p className="text-lg text-gray-800 mb-1">{job.company}, {job.location}</p>
-                                                <p className="text-gray-600">{job.duration}</p>
-                                                <ul className="list-disc list-inside mt-4 text-gray-700 space-y-1">
-                                                    {job.description.map((desc, i) => (
-                                                        <li key={i}>{desc}</li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Game Projects Section */}
-                <section id="game-projects" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
-                    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Game Projects</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
-                        {gameProjectsData.map((project, index) => (
-                            <div
-                                key={index}
-                                className="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden font-k2d-regular cursor-pointer"
-                                style={{ backgroundColor: colors.accent1 }}
-                                onClick={(event) => handleProjectClick(project, event)}
-                            >
-                                <img
-                                    src={project.imageSrc}
-                                    alt={project.name}
-                                    width={600}
-                                    height={400}
-                                    className="w-full h-48 md:h-64 object-cover"
-                                    onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        target.onerror = null;
-                                        target.src = `https://placehold.co/600x400/${colors.primary.substring(1)}/FFFFFF?text=${encodeURIComponent(project.name)}`;
-                                    }}
-                                />
-                                <div className="p-6">
-                                    <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{project.name}</h3>
-                                    <p className="text-gray-700">{project.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-                {isModalOpen && selectedProject && (
-                    <ProjectDetailsModal
-                        project={selectedProject}
-                        onClose={handleCloseModal}
-                        initialPosition={modalPosition}
-                        backgroundColor={modalBackgroundColor}
-                    />
                 )}
+            </div>
+        ))}
+    </div>
+</section>
 
-                {/* Art Works Section */}
-                <section id="art-works" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
-                    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Art Works</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-6xl">
-                        {artWorksData.map((art) => (
-                            <div key={art.id} className={`rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden font-k2d-regular ${art.aspectRatio}`} style={{ backgroundColor: colors.accent2 }}>
-                                <img
-                                    src={art.imageSrc}
-                                    alt={art.title}
-                                    className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                        const target = e.target as HTMLImageElement;
-                                        target.onerror = null;
-                                        target.src = `https://placehold.co/400x400/${colors.accent2.substring(1)}/FFFFFF?text=Art+Work+${art.id}`;
-                                    }}
-                                />
-                                <div className="p-4 text-center absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent text-white">
-                                    <h3 className="text-xl font-k2d-bold" style={{ color: colors.text }}>{art.title}</h3>
-                                </div>
-                            </div>
-                        ))}
+                    {/* Game Projects Section*/}
+<section id="game-projects" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
+    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Game Projects</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+        {gameProjectsData.map((project, index) => (
+            <div
+                key={index}
+                className="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden font-k2d-regular cursor-pointer"
+                style={{ backgroundColor: colors.accent1 }}
+                onClick={(event) => handleProjectClick(project, event)}
+            >
+                <img
+                    src={project.imageSrc}
+                    alt={project.name}
+                    width={600}
+                    height={400}
+                    className="w-full h-48 md:h-64 object-cover"
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = `https://placehold.co/600x400/${colors.primary.substring(1)}/FFFFFF?text=${encodeURIComponent(project.name)}`;
+                    }}
+                />
+                <div className="p-6">
+                    <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{project.name}</h3>
+                    <p className="text-gray-700" style={{ whiteSpace: 'pre-line' }}>{project.description}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+{isModalOpen && selectedProject && (
+    <ProjectDetailsModal
+        project={selectedProject}
+        onClose={handleCloseModal}
+        initialPosition={modalPosition}
+        backgroundColor={modalBackgroundColor}
+    />
+)}
+
+{/* Work Experience Section*/}
+<section id="experience" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
+    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Work Experience</h2>
+    <div className="w-full max-w-4xl relative pl-8 md:pl-0">
+        <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5" style={{ backgroundColor: colors.primary }}></div>
+        {workExperienceData.map((job, index) => (
+            <div
+                key={index}
+                className={`flex flex-col md:flex-row items-start md:items-stretch w-full mb-12 relative ${
+                    index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                }`}
+            >
+                {/* Timeline dot and line (mobile) */}
+                <div className="md:hidden timeline-item w-full">
+                    <div className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: index % 2 === 0 ? colors.accent1 : colors.accent2 }}>
+                        <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{job.title}</h3>
+                        <p className="text-lg text-gray-800 mb-1">{job.company}, {job.location}</p>
+                        <p className="text-gray-600">{job.duration}</p>
+                        <ul className="list-disc list-inside mt-4 text-gray-700 space-y-1">
+                            {job.description.map((desc, i) => (
+                                <li key={i} style={{ whiteSpace: 'pre-line' }}>{desc}</li>
+                            ))}
+                        </ul>
                     </div>
-                </section>
-
-                {/* Articles Section */}
-                <section id="articles" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
-                    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Articles</h2>
-                    <div className="w-full max-w-4xl space-y-8">
-                        {articlesData.map((article, index) => (
-                            <div key={index} className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: colors.accent1 }}>
-                                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{article.title}</h3>
-                                <p className="text-gray-700 mb-4">{article.description}</p>
-                                <a
-                                    href={article.link}
-                                    className="inline-block text-blue-600 hover:underline"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Read More
-                                </a>
+                </div>
+                {/* Timeline dot and content (desktop) */}
+                <div className="hidden md:flex w-full items-center justify-between">
+                    {/* Left content */}
+                    <div className={`w-full md:w-6/12 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
+                        {index % 2 !== 0 && (
+                            <div className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: index % 2 === 0 ? colors.accent1 : colors.accent2 }}>
+                                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{job.title}</h3>
+                                <p className="text-lg text-gray-800 mb-1">{job.company}, {job.location}</p>
+                                <p className="text-gray-600">{job.duration}</p>
+                                <ul className="list-disc list-inside mt-4 text-gray-700 space-y-1">
+                                    {job.description.map((desc, i) => (
+                                        <li key={i} style={{ whiteSpace: 'pre-line' }}>{desc}</li>
+                                    ))}
+                                </ul>
                             </div>
-                        ))}
+                        )}
                     </div>
-                </section>
-            </main>
+                    {/* Timeline dot */}
+                    <div className="relative w-2/12 flex justify-center">
+                        <div className="w-4 h-4 rounded-full absolute top-1/2 -translate-y-1/2" style={{ backgroundColor: colors.primary, border: `2px solid ${colors.secondary}` }}></div>
+                    </div>
+                    {/* Right content */}
+                    <div className={`w-full md:w-6/12 ${index % 2 === 0 ? '' : 'md:text-left'}`}>
+                        {index % 2 === 0 && (
+                            <div className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: index % 2 === 0 ? colors.accent1 : colors.accent2 }}>
+                                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{job.title}</h3>
+                                <p className="text-lg text-gray-800 mb-1">{job.company}, {job.location}</p>
+                                <p className="text-gray-600">{job.duration}</p>
+                                <ul className="list-disc list-inside mt-4 text-gray-700 space-y-1">
+                                    {job.description.map((desc, i) => (
+                                        <li key={i} style={{ whiteSpace: 'pre-line' }}>{desc}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
 
-{mounted && <SpeedInsights />}
-            {/* 返回顶部按钮 */}
-            {mounted && showBackToTop && (
-                <button
-                    onClick={() => {
+{/* Art Works Section */}
+<section id="art-works" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
+    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Art Works</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full max-w-6xl">
+        {artWorksData.map((art) => (
+            <div key={art.id} className={`rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden font-k2d-regular ${art.aspectRatio}`} style={{ backgroundColor: colors.accent2 }}>
+                <img
+                    src={art.imageSrc}
+                    alt={art.title}
+                    title={art.description}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = `https://placehold.co/400x400/${colors.accent2.substring(1)}/FFFFFF?text=Art+Work+${art.id}`;
+                    }}
+                />
+                <div className="p-4 text-center absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent text-white">
+                    <h3 className="text-xl font-k2d-bold" style={{ color: colors.text }}>{art.title}</h3>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+{/* Articles Section */}
+<section id="articles" className="min-h-screen flex flex-col items-center justify-center py-24 md:py-32">
+    <h2 className="text-4xl md:text-6xl font-k2d-bold mb-8" style={{ color: colors.primary }}>Articles</h2>
+    <div className="w-full max-w-4xl space-y-8">
+        {articlesData.map((article, index) => (
+            <div key={index} className="p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 font-k2d-regular" style={{ backgroundColor: colors.accent1 }}>
+                <h3 className="text-2xl font-k2d-bold mb-2" style={{ color: colors.text }}>{article.title}</h3>
+                <p className="text-gray-700 mb-4" style={{ whiteSpace: 'pre-line' }}>{article.description}</p>
+                <a
+                    href={article.link}
+                    className="inline-block text-blue-600 hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Read More
+                </a>
+            </div>
+        ))}
+    </div>
+</section>
+    </main>
+
+    {mounted && <SpeedInsights />}
+    {mounted && showBackToTop && (
+      <button
+        onClick={() => {
                         document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className="fixed bottom-28 right-8 p-4 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 overflow-hidden"
