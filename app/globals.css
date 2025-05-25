@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'K2D', 'Geist', 'Geist Mono', sans-serif;
+}
+
 /* 之前在 App.js <style> 块中的 body 样式 */
 body {
   /* 确保这里没有冲突的 font-family 定义，让 Tailwind 来管理 */
