@@ -48,10 +48,6 @@ type Project = {
     detailedDescription: string;
 };
 
-type art = {
-    description: string;
-};
-
 type ModalPosition = { left: number; top: number; width: number; height: number };
 
 const colors = {
@@ -61,6 +57,8 @@ const colors = {
     accent2: '#95E1D3',
     text: '#000',
 };
+
+const particleColors = [colors.primary, colors.secondary, colors.accent1, colors.accent2];
 
 const navItems: NavItem[] = [
     { name: 'Home', icon: Home, id: 'home' },
@@ -412,9 +410,6 @@ function FisheyeNavBar({
             nav.removeEventListener('mouseleave', handleLeave);
         };
     }, []);
-
-    //art tips
-    const [hoveredArtId, setHoveredArtId] = useState<number | null>(null);
     
     // 计算每个按钮的scale/zIndex
     const getBtnProps = (idx: number) => {
@@ -525,7 +520,6 @@ const App = () => {
 
     // Mouse particle effect
     const [mouseParticles, setMouseParticles] = useState<MouseParticle[]>([]);
-    const particleColors = [colors.primary, colors.secondary, colors.accent1, colors.accent2];
     const particleCount = useRef(0);
 
     // My Skills section
@@ -667,11 +661,11 @@ const App = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setSkillBgIndexes(prev =>
-                prev.map((idx, i) => (idx + 1 + i) % skillColors.length) // 每个卡片步进不同，显得更跳跃
+                prev.map((idx, i) => (idx + 1 + i) % skillColors.length)
             );
-        }, 2000); // 0.6秒切换一次
+        }, 2000);
         return () => clearInterval(interval);
-    }, [skillsData.length, skillColors.length]);
+    }, [skillColors.length]);
 
     //work afar
     const workCardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -710,7 +704,7 @@ const App = () => {
     const [projectBgIndexes, setProjectBgIndexes] = useState<number[]>(() =>
         Array(gameProjectsData.length).fill(0)
     );
-    const [hoveredProjectIdx, setHoveredProjectIdx] = useState<number | null>(null);
+
     const projectIntervalRef = useRef<(NodeJS.Timeout | null)[]>([]);
 
     const handleProjectMouseEnter = (idx: number) => {
