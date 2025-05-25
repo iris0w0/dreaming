@@ -8,6 +8,7 @@ import {
     Chrome, Box, ListTodo, LayoutGrid, ClipboardList, GitBranch, GitCommit, Code, Palette, PenTool, Film, AudioWaveform, LayoutDashboard, VolumeX, Volume2
 } from 'lucide-react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import RotatingLabels3D from '../components/RotatingLabels3D';
 
 // =================== 类型定义与基础数据 ===================
 type MouseParticle = {
@@ -165,6 +166,10 @@ const fullIntroText = `Hey, I’m Jingyi Zhang (Iris) 👋
 I’m a professional Game Designer, Project Manager, Community Manager, and sometimes an Artist.
 
 Welcome to my space — here’s where you can explore what I’m creating, managing, and dreaming up.
+I do my best to bring ideas to life with a whole lot of ❤️`;
+
+const welcomeText = `Welcome to my space — here’s where you can explore what I’m creating, managing, and dreaming up.
+
 I do my best to bring ideas to life with a whole lot of ❤️`;
 
 const gameProjectsData: Project[] = [
@@ -504,6 +509,74 @@ function FisheyeNavBar({
     );
 }
 
+    // 环形标签动画组件
+    function RotatingLabels({
+        labels,
+        radius,
+        fontSize,
+        duration,
+        color,
+        }: {
+        labels: string[];
+        radius: number;
+        fontSize: number;
+        duration: number; // 动画一圈秒数
+        color: string;
+        }) {
+        // 旋转动画
+        const [angle, setAngle] = useState(0);
+        useEffect(() => {
+            let frame: number;
+            const animate = () => {
+            setAngle((prev) => (prev + 360 / (duration * 60)) % 360);
+            frame = requestAnimationFrame(animate);
+            };
+            frame = requestAnimationFrame(animate);
+            return () => cancelAnimationFrame(frame);
+        }, [duration]);
+        const count = labels.length;
+        return (
+            <div
+            style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                width: radius * 2,
+                height: radius * 2,
+                transform: 'translate(-50%, -50%)',
+                pointerEvents: 'none',
+            }}
+            >
+            {labels.map((label, i) => {
+                const theta = ((360 / count) * i + angle) * (Math.PI / 180);
+                const x = radius + radius * Math.cos(theta);
+                const y = radius + radius * Math.sin(theta);
+                return (
+                <span
+                    key={label}
+                    style={{
+                    position: 'absolute',
+                    left: x,
+                    top: y,
+                    transform: `translate(-50%, -50%)`,
+                    fontSize,
+                    color,
+                    fontWeight: 700,
+                    whiteSpace: 'nowrap',
+                    textShadow: '0 2px 8px #fff8',
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                    letterSpacing: 1,
+                    }}
+                >
+                    {label}
+                </span>
+                );
+            })}
+            </div>
+        );
+        }
+
 // =================== 页面主组件 ===================
 const App = () => {
     // 音乐播放
@@ -511,8 +584,8 @@ const App = () => {
     const audioRef = useRef<HTMLAudioElement>(null);
 
     // Typewriter effect
-    const [displayedIntroText, setDisplayedIntroText] = useState('');
-    const [introTextIndex, setIntroTextIndex] = useState(0);
+    const [displayedWelcomeText, setDisplayedWelcomeText] = useState('');
+    const [welcomeTextIndex, setWelcomeTextIndex] = useState(0);
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
     // Back to top button
@@ -540,16 +613,16 @@ const App = () => {
 
     // Typewriter effect
     useEffect(() => {
-        if (introTextIndex < fullIntroText.length) {
+        if (welcomeTextIndex < welcomeText.length) {
             const timeoutId = setTimeout(() => {
-                setDisplayedIntroText((prev) => prev + fullIntroText[introTextIndex]);
-                setIntroTextIndex((prev) => prev + 1);
+                setDisplayedWelcomeText((prev) => prev + welcomeText[welcomeTextIndex]);
+                setWelcomeTextIndex((prev) => prev + 1);
             }, 18);
             return () => clearTimeout(timeoutId);
         } else {
             setIsTypingComplete(true);
         }
-    }, [introTextIndex]);
+    }, [welcomeTextIndex, welcomeText]);
 
     // Back to top button
     useEffect(() => {
@@ -793,7 +866,7 @@ const App = () => {
                     font-weight: 700;
                 }
             `}</style>
-
+    <main>
             {/* 鼠标粒子特效 */}
             {mounted && (
                 <div style={{ position: 'fixed', left: 0, top: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 9999 }}>
@@ -831,57 +904,130 @@ const App = () => {
                 </>
             )}
 
-            {/* 页面内容，底部留出导航栏高度 */}
-                <main className="mx-auto px-4 py-16 md:py-24" style={{ maxWidth: 900, paddingBottom: NAV_HEIGHT + 32 }}>
-                <section
-    id="home"
-    className="flex flex-col items-center justify-center text-center min-h-[60vh]"
-    style={{ marginTop: '90px' }}
-    >
-                    <img
-                        src="/images/your_photo.jpg"
-                        alt="Jingyi Zhang (Iris)"
-                        width={192}
-                        height={192}
-                        className="w-36 h-36 md:w-48 md:h-48 rounded-full object-cover shadow-lg mb-8"
-                        onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.onerror = null;
-                            target.src = 'https://placehold.co/200x200/F38181/FFFFFF?text=Photo+Error';
+            <section
+            id="home"
+            className="relative flex items-end justify-center min-h-[60vh] w-full"
+            style={{ height: '100vh', minHeight: 600, padding: 0, margin: 0 }}
+            >
+            {/* 底部大头像和环形标签 */}
+            <div
+                className="absolute left-1/2 flex flex-col items-center"
+                style={{
+                top: '80px', // 推荐4cm或120px
+                transform: 'translateX(-50%)',
+                width: '100%',
+                pointerEvents: 'none',
+                zIndex: 2,
+                }}
+            >
+                {/* 名字和按钮 */}
+                <div className="flex flex-col items-center" style={{ pointerEvents: 'auto', marginBottom: '80px' }}>
+                    <span
+                        className="font-k2d-bold"
+                        style={{
+                        fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+                        color: colors.primary,
+                        lineHeight: 1.1,
+                        letterSpacing: 2,
+                        textShadow: '0 2px 16px #fff8',
                         }}
-                    />
-                    <div className="text-xl md:text-2xl max-w-2xl leading-relaxed font-k2d-regular whitespace-pre-line mb-6" style={{ minHeight: 220 }}>
-                        {isTypingComplete ? (
-                            <span>
-                                {fullIntroText.split(/(Jingyi Zhang \(Iris\))/).map((part, idx) =>
-                                    part === 'Jingyi Zhang (Iris)' ? (
-                                        <span key={idx} className="font-k2d-bold" style={{ color: colors.primary }}>{part}</span>
-                                    ) : (
-                                        <React.Fragment key={idx}>{part}</React.Fragment>
-                                    )
-                                )}
-                            </span>
-                        ) : (
-                            <>
-                                {displayedIntroText.split(/(Jingyi Zhang \(Iris\))/).map((part, idx) =>
-                                    part === 'Jingyi Zhang (Iris)' ? (
-                                        <span key={idx} className="font-k2d-bold" style={{ color: colors.primary }}>{part}</span>
-                                    ) : (
-                                        <React.Fragment key={idx}>{part}</React.Fragment>
-                                    )
-                                )}
-                                <span className="animate-pulse">|</span>
-                            </>
-                        )}
-                    </div>
-                    <button
-                        onClick={handleDownloadResume}
-                        className="relative mt-20 px-8 py-4 bg-gradient-to-r from-red-400 to-pink-500 text-white text-lg font-k2d-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 overflow-hidden"
-                        style={{ backgroundColor: colors.primary }}
+                    >
+                        Jingyi Zhang
+                    </span>
+                    <span
+                        className="font-k2d-bold"
+                        style={{
+                        fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                        color: colors.primary,
+                        opacity: 0.7,
+                        marginTop: 0,
+                        letterSpacing: 2,
+                        }}
+                    >
+                        Iris
+                    </span>
+                    <a
+                        href="/resume/jingyi_zhang_resume.pdf"
+                        download="Jingyi_Zhang_Resume.pdf"
+                        className="mt-8 px-8 py-4 bg-gradient-to-r from-red-400 to-pink-500 text-white text-lg font-k2d-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 overflow-hidden text-center"
+                        style={{
+                            backgroundColor: colors.primary,
+                            display: 'inline-block',
+                            position: 'relative',   // 新增
+                            zIndex: 10,             // 新增，确保比图片高
+                        }}
                     >
                         GET MY RESUME
-                    </button>
-                </section>
+                    </a>
+                    </div>
+
+                <div className="relative" style={{ width: 440, height: 440 }}>
+                <RotatingLabels3D
+                    labels={['Game Designer', 'Project Manager', 'Community Manager', 'Artist']}
+                    radius={180}
+                    fontSize={40}
+                    duration={18}
+                    color={colors.accent2}
+                    centerZ={80}
+                >
+                    <img
+                    src="/images/your_photo.png"
+                    alt="Jingyi Zhang (Iris)"
+                    className="object-cover"
+                    style={{
+                        position: 'absolute',
+                        left: '50%',
+                        top: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        height: '80vh',
+                        width: 'auto',
+                        maxWidth: '90vw',
+                        zIndex: 2,
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                        pointerEvents: 'auto',
+                    }}
+                    onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = 'https://placehold.co/240x240/F38181/FFFFFF?text=Photo+Error';
+                    }}
+                    />
+                </RotatingLabels3D>
+                </div>
+            </div>
+
+            {/* 右侧打字机 */}
+            <div
+                className="absolute right-[12vw] top-[40vh] flex flex-col items-start max-w-xl"
+                style={{
+                zIndex: 3,
+                minWidth: 320,
+                maxWidth: 600,
+                pointerEvents: 'auto',
+                }}
+            >
+                <div
+                className="text-xl md:text-2xl leading-relaxed font-k2d-regular whitespace-pre-line mb-6"
+                style={{ minHeight: 120, color: colors.text }}
+                >
+                {isTypingComplete ? (
+                    <span>
+                        {welcomeText.split(/(\n)/).map((part, idx) =>
+                            part === '\n' ? <br key={idx} /> : <React.Fragment key={idx}>{part}</React.Fragment>
+                        )}
+                    </span>
+                ) : (
+                    <>
+                        {displayedWelcomeText.split(/(\n)/).map((part, idx) =>
+                            part === '\n' ? <br key={idx} /> : <React.Fragment key={idx}>{part}</React.Fragment>
+                        )}
+                        <span className="animate-pulse">|</span>
+                    </>
+                )}
+                </div>
+            </div>
+            </section>
 
     {/* My Skills Section */}
     <section
