@@ -8,7 +8,7 @@ import {
     Chrome, Box, ListTodo, LayoutGrid, ClipboardList, GitBranch, GitCommit, Code, Palette, PenTool, Film, AudioWaveform, LayoutDashboard, VolumeX, Volume2
 } from 'lucide-react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import RotatingLabels3D from '../components/RotatingLabels3D';
+import HomeFloatingCards from '../components/HomeFloatingCards';
 
 // =================== 类型定义与基础数据 ===================
 type MouseParticle = {
@@ -757,6 +757,14 @@ const App = () => {
     const [hoveredArticleIdx, setHoveredArticleIdx] = useState<number | null>(null);
     const articleHoverColors = [colors.primary, colors.accent2, colors.accent1, colors.secondary];
 
+    //cards
+    const homeCards = [
+        { id: 'home1', imageSrc: '/images/home_cards/game_designer.png' },
+        { id: 'home2', imageSrc: '/images/home_cards/project_manager.png' },
+        { id: 'home3', imageSrc: '/images/home_cards/community_manager.png' },
+        { id: 'home4', imageSrc: '/images/home_cards/artist.png' },
+        ];
+
     return (
       <div className="relative min-h-screen" style={{ backgroundColor: colors.secondary, color: colors.text, fontFamily: 'K2D, sans-serif' }}>
             <style>{`
@@ -817,129 +825,91 @@ const App = () => {
             )}
 
             <section
-            id="home"
-            className="relative flex items-end justify-center min-h-[60vh] w-full"
-            style={{ height: '100vh', minHeight: 600, padding: 0, margin: 0 }}
-            >
-            {/* 底部大头像和环形标签 */}
-            <div
-                className="absolute left-1/2 flex flex-col items-center"
-                style={{
-                top: '80px', // 推荐4cm或120px
-                transform: 'translateX(-50%)',
-                width: '100%',
-                pointerEvents: 'none',
-                zIndex: 2,
-                }}
-            >
-                {/* 名字和按钮 */}
-                <div className="flex flex-col items-center" style={{ pointerEvents: 'auto', marginBottom: '80px' }}>
+                id="home"
+                className="relative flex flex-col items-center justify-center min-h-[60vh] w-full"
+                style={{ height: '100vh', minHeight: 600, padding: 0, margin: 0 }}
+                >
+
+                {/* 欢迎语：只保留一份，居中 */}
+                    <div
+                    className="max-w-6xl w-full px-4 mb-8"
+                    style={{ pointerEvents: 'auto' }}
+                    >
+                    <div
+                        className="text-xl md:text-2xl leading-relaxed font-k2d-regular whitespace-pre-line text-center"
+                        style={{ minHeight: 120, color: colors.text }}
+                    >
+                        {isTypingComplete ? (
+                        <span>
+                            {welcomeText.split(/(\n)/).map((part, idx) =>
+                            part === '\n' ? <br key={idx} /> : <React.Fragment key={idx}>{part}</React.Fragment>
+                            )}
+                        </span>
+                        ) : (
+                        <>
+                            {displayedWelcomeText.split(/(\n)/).map((part, idx) =>
+                            part === '\n' ? <br key={idx} /> : <React.Fragment key={idx}>{part}</React.Fragment>
+                            )}
+                            <span className="animate-pulse">|</span>
+                        </>
+                            )}
+                        </div>
+                    </div>
+
+                {/* 卡片动画在上 */}
+                <div
+                    style={{
+                        width: '100%',
+                        maxWidth: 1200,
+                        pointerEvents: 'auto',
+                        marginBottom: 0,
+                        marginTop: 0, // 让卡牌整体往下移
+                    }}
+                >
+                    <HomeFloatingCards cards={homeCards} />
+                </div>
+
+                {/* 名字和按钮在下 */}
+                <div className="flex flex-col items-center" style={{ pointerEvents: 'auto', marginBottom: '10px' }}>
                     <span
-                        className="font-k2d-bold"
-                        style={{
+                    className="font-k2d-bold"
+                    style={{
                         fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                         color: colors.primary,
                         lineHeight: 1.1,
                         letterSpacing: 2,
                         textShadow: '0 2px 16px #fff8',
-                        }}
+                    }}
                     >
-                        Jingyi Zhang
+                    Jingyi Zhang
                     </span>
                     <span
-                        className="font-k2d-bold"
-                        style={{
+                    className="font-k2d-bold"
+                    style={{
                         fontSize: 'clamp(2rem, 4vw, 3.5rem)',
                         color: colors.primary,
                         opacity: 0.7,
                         marginTop: 0,
                         letterSpacing: 2,
-                        }}
+                    }}
                     >
-                        Iris
+                    Iris
                     </span>
-                    <a
-                        href="/resume/jingyi_zhang_resume.pdf"
-                        download="Jingyi_Zhang_Resume.pdf"
-                        className="mt-8 px-8 py-4 bg-gradient-to-r from-red-400 to-pink-500 text-white text-lg font-k2d-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 overflow-hidden text-center"
-                        style={{
-                            backgroundColor: colors.primary,
-                            display: 'inline-block',
-                            position: 'relative',   // 新增
-                            zIndex: 10,             // 新增，确保比图片高
-                        }}
-                    >
-                        GET MY RESUME
-                    </a>
-                    </div>
-
-                <div className="relative" style={{ width: 440, height: 440 }}>
-                <RotatingLabels3D
-                    labels={['Game Designer', 'Project Manager', 'Community Manager', 'Artist']}
-                    radius={180}
-                    fontSize={40}
-                    duration={18}
-                    color={colors.accent2}
-                    centerZ={80}
-                >
-                    <img
-                    src="/images/your_photo.png"
-                    alt="Jingyi Zhang (Iris)"
-                    className="object-cover"
+                        <a
+                    href="/resume/jingyi_zhang_resume.pdf"
+                    download="Jingyi_Zhang_Resume.pdf"
+                    className="mt-8 px-8 py-4 bg-gradient-to-r from-red-400 to-pink-500 text-white text-lg font-k2d-bold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 overflow-hidden text-center"
                     style={{
-                        position: 'absolute',
-                        left: '50%',
-                        top: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        height: '80vh',
-                        width: 'auto',
-                        maxWidth: '90vw',
-                        zIndex: 2,
-                        objectFit: 'cover',
-                        objectPosition: 'center',
-                        pointerEvents: 'auto',
+                        backgroundColor: colors.primary,
+                        display: 'inline-block',
+                        position: 'relative',
+                        zIndex: 10,
                     }}
-                    onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = 'https://placehold.co/240x240/F38181/FFFFFF?text=Photo+Error';
-                    }}
-                    />
-                </RotatingLabels3D>
+                    >
+                    GET MY RESUME
+                    </a>
                 </div>
-            </div>
-
-            {/* 右侧打字机 */}
-            <div
-                className="absolute right-[12vw] top-[40vh] flex flex-col items-start max-w-xl"
-                style={{
-                zIndex: 3,
-                minWidth: 320,
-                maxWidth: 600,
-                pointerEvents: 'auto',
-                }}
-            >
-                <div
-                className="text-xl md:text-2xl leading-relaxed font-k2d-regular whitespace-pre-line mb-6"
-                style={{ minHeight: 120, color: colors.text }}
-                >
-                {isTypingComplete ? (
-                    <span>
-                        {welcomeText.split(/(\n)/).map((part, idx) =>
-                            part === '\n' ? <br key={idx} /> : <React.Fragment key={idx}>{part}</React.Fragment>
-                        )}
-                    </span>
-                ) : (
-                    <>
-                        {displayedWelcomeText.split(/(\n)/).map((part, idx) =>
-                            part === '\n' ? <br key={idx} /> : <React.Fragment key={idx}>{part}</React.Fragment>
-                        )}
-                        <span className="animate-pulse">|</span>
-                    </>
-                )}
-                </div>
-            </div>
-            </section>
+                </section>
 
     {/* My Skills Section */}
     <section

@@ -8,6 +8,11 @@ module.exports = {
     // 确保也包含了你的主组件文件，例如 `app/page.tsx` 或 `pages/index.tsx`
   ],
   theme: {
+    screens: {
+      sm: '40px',
+      md: '100px', // md 断点改为 900px
+      lg: '900px',
+    },
     extend: {
       // 在这里定义你的自定义字体
       fontFamily: {
@@ -22,7 +27,7 @@ module.exports = {
         accent1: '#EAFFD0',
         accent2: '#95E1D3',
         text: '#000',
-      }
+      },
     },
   },
   plugins: [],
