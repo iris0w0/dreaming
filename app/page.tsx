@@ -453,9 +453,13 @@ function FisheyeNavBar({
             onMouseEnter={() => setNavHover(true)}
             onMouseLeave={() => setNavHover(false)}
         >
-            {/* 外层加overflow-x-auto，内部flex-nowrap，保证超出时可滚动 */}
+            {/* 关键：响应式控制 overflow-x 和 flex-wrap */}
             <div
-                className="flex gap-2 md:gap-4 px-4 py-3 rounded-full shadow-2xl bg-white/90 border border-pink-200 backdrop-blur-md overflow-x-auto flex-nowrap"
+                className="
+                    flex gap-2 md:gap-4 px-4 py-3 rounded-full shadow-2xl bg-white/90 border border-pink-200 backdrop-blur-md
+                    overflow-x-auto flex-nowrap
+                    md:overflow-x-visible md:flex-wrap
+                "
                 style={{
                     boxShadow: navHover || hoveredIdx !== null
                         ? `0 8px 40px 0 ${colors.primary}33`
@@ -464,7 +468,7 @@ function FisheyeNavBar({
                     background: navHover || hoveredIdx !== null
                         ? colors.accent2
                         : colors.accent2,
-                    WebkitOverflowScrolling: 'touch', // iOS 惯性滚动
+                    WebkitOverflowScrolling: 'touch',
                     maxWidth: '100vw',
                 }}
             >
