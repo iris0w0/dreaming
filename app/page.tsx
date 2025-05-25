@@ -704,11 +704,10 @@ const App = () => {
     const [projectBgIndexes, setProjectBgIndexes] = useState<number[]>(() =>
         Array(gameProjectsData.length).fill(0)
     );
-    const [hoveredProjectIdx, setHoveredProjectIdx] = useState<number | null>(null);
+
     const projectIntervalRef = useRef<(NodeJS.Timeout | null)[]>([]);
 
     const handleProjectMouseEnter = (idx: number) => {
-        setHoveredProjectIdx(idx);
 
         // 立即切换到下一个颜色
         setProjectBgIndexes(prev =>
@@ -729,7 +728,6 @@ const App = () => {
     };
 
     const handleProjectMouseLeave = (idx: number) => {
-        setHoveredProjectIdx(null);
         // 停止动画并恢复原色
         if (projectIntervalRef.current[idx]) {
             clearInterval(projectIntervalRef.current[idx]!);
