@@ -43,7 +43,7 @@ type Project = {
     name: string;
     description: string;
     imageSrc: string;
-    detailedImageSrc: string[];
+    detailedImageSrcs: string[];
     detailedDescription: string;
 };
 
