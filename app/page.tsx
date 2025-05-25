@@ -862,8 +862,8 @@ const App = () => {
                         width: '100%',
                         maxWidth: 1200,
                         pointerEvents: 'auto',
-                        marginBottom: 0,
-                        marginTop: 0, // 让卡牌整体往下移
+                        marginBottom: -60,
+                        marginTop: -90, // 让卡牌整体往下移
                     }}
                 >
                     <HomeFloatingCards cards={homeCards} />
