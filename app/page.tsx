@@ -69,7 +69,7 @@ const navItems: NavItem[] = [
     { name: 'Art Works', icon: Brush, id: 'art-works' },
     { name: 'Articles', icon: BookOpen, id: 'articles' },
     { name: 'Twitter', icon: Twitter, link: 'https://twitter.com/Iris_dreaming_' },
-    { name: 'Instagram', icon: Instagram, link: 'https://www.instagram.com/daydreams_of_iris' },
+    { name: 'Instagram', icon: Instagram, link: 'https://www.instagram.com/snugspell_studio/' },
     { name: 'LinkedIn', icon: Linkedin, link: 'https://www.linkedin.com/in/jingyi-zhang-69829324a/' },
     { name: 'Music', icon: Music, actionType: 'toggle-music' },
 ];
@@ -105,10 +105,23 @@ const toolIcons: Record<string, React.ReactNode> = {
 
 const workExperienceData: WorkExperience[] = [
     {
+        title: 'Founder (Full-time)',
+        company: 'Snugspell Studio',
+        location: 'Stockholm, Sweden',
+        duration: 'Sep 2025 - Present',
+        description: [
+            'Leading the development of original game projects and interactive experiences.',
+            'Providing game design consultancy for international clients.',
+            'Designing and creating handcrafted products inspired by games, anime, nature, and storytelling.',
+            'Developing Snugspell Studio’s brand identity, marketing strategy, and online presence.',
+            'Managing business operations, partnerships, events, and product sales.',
+        ],
+    },
+    {
         title: 'Game Designer (Full-time)',
         company: 'Gamescan Stockholm Studios/Metaking Studio',
         location: 'Stockholm, Sweden',
-        duration: 'Nov 2023 - Present',
+        duration: 'Nov 2023 - Jun 2026',
         description: [
             'Delivered core gameplay, progression, mechanics, and economy systems for live game BLOCKLORDS (30K+ players), collaborating with the Game Director and cross-functional teams using Miro, Google Suite, Figma, and Unity to drive features from concept to implementation.',
             'Planned and tracked production via Jira and Trello, facilitating sprint planning and managing cross-team dependencies.',
@@ -254,6 +267,9 @@ const artWorksData = [
     { id: 4, aspectRatio: 'aspect-w-16 aspect-h-9', imageSrc: '/images/art_works/art_4.png', title: 'My Art 4', description: 'Childrens picture book illustration'},
     { id: 5, aspectRatio: 'aspect-w-9 aspect-h-16', imageSrc: '/images/art_works/art_5.png', title: 'My Art 5', description: '3D props deisgn and character design'},
     { id: 6, aspectRatio: 'aspect-w-5 aspect-h-4', imageSrc: '/images/art_works/art_6.png', title: 'My Art 6', description: 'Character Design'},
+    { id: 7, aspectRatio: 'aspect-w-16 aspect-h-9', imageSrc: '/images/art_works/art_4.png', title: 'My Art 7', description: 'Tiny Animals & Characters Crochet Works'},
+    { id: 8, aspectRatio: 'aspect-w-9 aspect-h-16', imageSrc: '/images/art_works/art_5.png', title: 'My Art 8', description: 'Reverse Single Crochet Works'},
+    { id: 9, aspectRatio: 'aspect-w-5 aspect-h-4', imageSrc: '/images/art_works/art_6.png', title: 'My Art 9', description: 'Tiny Fursona Crochet'},
 ];
 
 const articlesData = [
