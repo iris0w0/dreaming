@@ -175,7 +175,7 @@ const workExperienceData: WorkExperience[] = [
     },
 ];
 
-const welcomeText = `Welcome to my space — here’s where you can explore what I’m creating, managing, and dreaming up.
+const welcomeText = `Welcome to my space! Here’s where you can explore what I’m creating, managing, and dreaming up.
 
 I do my best to bring ideas to life with a whole lot of ❤️`;
 
@@ -267,9 +267,9 @@ const artWorksData = [
     { id: 4, aspectRatio: 'aspect-w-16 aspect-h-9', imageSrc: '/images/art_works/art_4.png', title: 'My Art 4', description: 'Childrens picture book illustration'},
     { id: 5, aspectRatio: 'aspect-w-9 aspect-h-16', imageSrc: '/images/art_works/art_5.png', title: 'My Art 5', description: '3D props deisgn and character design'},
     { id: 6, aspectRatio: 'aspect-w-5 aspect-h-4', imageSrc: '/images/art_works/art_6.png', title: 'My Art 6', description: 'Character Design'},
-    { id: 7, aspectRatio: 'aspect-w-16 aspect-h-9', imageSrc: '/images/art_works/art_4.png', title: 'My Art 7', description: 'Tiny Animals & Characters Crochet Works'},
-    { id: 8, aspectRatio: 'aspect-w-9 aspect-h-16', imageSrc: '/images/art_works/art_5.png', title: 'My Art 8', description: 'Reverse Single Crochet Works'},
-    { id: 9, aspectRatio: 'aspect-w-5 aspect-h-4', imageSrc: '/images/art_works/art_6.png', title: 'My Art 9', description: 'Tiny Fursona Crochet'},
+    { id: 7, aspectRatio: 'aspect-w-16 aspect-h-9', imageSrc: '/images/art_works/art_7.png', title: 'My Art 7', description: 'Tiny Animals & Characters Crochet Works'},
+    { id: 8, aspectRatio: 'aspect-w-9 aspect-h-16', imageSrc: '/images/art_works/art_8.png', title: 'My Art 8', description: 'Reverse Single Crochet Works'},
+    { id: 9, aspectRatio: 'aspect-w-5 aspect-h-4', imageSrc: '/images/art_works/art_9.png', title: 'My Art 9', description: 'Tiny Fursona Crochet'},
 ];
 
 const articlesData = [
@@ -937,7 +937,7 @@ const App = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-4xl">
         {skillsData.map((skill, index) => {
         const bgColor = skillColors[skillBgIndexes[index]];
-        const isRed = bgColor === colors.primary;
+        const isRed = true;
         const isSelected = selectedSkill === skill.name;
         const showTools = isSelected || (isRed && isSkillsInView);
 
